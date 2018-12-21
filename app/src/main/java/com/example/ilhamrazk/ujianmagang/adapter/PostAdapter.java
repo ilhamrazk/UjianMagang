@@ -1,13 +1,16 @@
 package com.example.ilhamrazk.ujianmagang.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.ilhamrazk.ujianmagang.CommentActivity;
 import com.example.ilhamrazk.ujianmagang.R;
 import com.example.ilhamrazk.ujianmagang.model.Post;
 
@@ -33,9 +36,19 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>  {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-        Post postitems = postItem.get(i);
+        final Post postitems = postItem.get(i);
         viewHolder.postBody.setText(postitems.getBody());
         viewHolder.postTitle.setText(postitems.getTitle());
+        viewHolder.llPost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, CommentActivity.class);
+                intent.putExtra("idpost",postitems.getId());
+                System.out.println("idpost "+postitems.getId());
+                context.startActivity(intent);
+            }
+        });
+
     }
 
     @Override
@@ -48,12 +61,14 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>  {
 
         public TextView postTitle;
         public TextView postBody;
+        public LinearLayout llPost;
 
         public ViewHolder(final View itemView) {
             super(itemView);
 
             postTitle = itemView.findViewById(R.id.tv_title);
             postBody = itemView.findViewById(R.id.tv_body);
+            llPost = itemView.findViewById(R.id.ll_post);
 
         }
     }

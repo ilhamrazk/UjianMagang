@@ -59,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
                                 Post postTemp = new Post();
                                 postTemp.setBody(jsonObject.get("body").getAsString());
                                 postTemp.setTitle(jsonObject.get("title").getAsString());
+                                postTemp.setId(jsonObject.get("id").getAsInt());
                                 postList.add(postTemp);
                                 mAdapter.notifyDataSetChanged();
                             }
